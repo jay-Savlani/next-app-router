@@ -9,7 +9,8 @@ export default async function PokemonData({ params }) {
    * Default fetch behaviour will be cache the data in data cache
    */
   const pokemon = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${params.slug}`
+    `https://pokeapi.co/api/v2/pokemon/${params.slug}`,
+    { cache: "no-store" }
   ).then((res) => res.json());
 
   return (

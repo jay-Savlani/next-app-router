@@ -34,6 +34,7 @@ export default function SignIn() {
    * Also client components do not have access to process.env variables
    */
   async function handleLogin() {
+    console.log("handle login called");
     resetError();
 
     try {
@@ -51,6 +52,7 @@ export default function SignIn() {
 
       if (response.username) {
         setAuthUser(response.username);
+        console.log("inside here");
         router.push("/todo-list");
       } else {
         setError(response.message);

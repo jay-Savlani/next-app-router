@@ -21,7 +21,7 @@ export default function PokemonList({ pokemonData }) {
         value={search}
         onChange={handleSearch}
         placeholder="Search"
-        className="mb-8 w-full rounded bg-transparent bg-slate-700 text-center py-2 focus:bg-slate-700 focus:outline-none"
+        className="mb-8 w-full rounded bg-transparent bg-slate-700 text-center py-2 focus:bg-slate-700 focus:outline-none focus:text-slate-50"
       />
       <ul className="grid grid-cols-5 gap-6">
         {filteredPokemonData.map((pokemon) => (

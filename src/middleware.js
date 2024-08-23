@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+
+const SECRECT_KEY = process.env.SECRECT_KEY;
 
 /**
  * Middleware in Next.js will run before any page is routed to or if any api route is called
@@ -9,12 +12,19 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   const token = request.cookies.get("authToken");
 
+  /**
+   * JWT verify callback is async function, we need to wait for it to finish
+   * therefore default fallback is placed in the else condition
+   * If placed outside of if, it will be run before jwt verify callback gets a chance to finish
+   */
   if (token) {
-    console.log("TOKEN found");
-    return NextResponse.next();
+    jwt.verify(token, SECRECT_KEY, (err, _) => {
+      if (err) return NextResponse.redirect(new URL("/signin", request.url));
+      return NextResponse.next();
+    });
+  } else {
+    return NextResponse.redirect(new URL("/signin", request.url));
   }
-
-  return NextResponse.redirect(new URL("/", request.url));
 }
 
 /**

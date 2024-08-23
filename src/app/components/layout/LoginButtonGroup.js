@@ -25,7 +25,9 @@ export default function LoginButtonGroup() {
   return (
     <div className="flex items-center gap-5 flex-grow absolute right-0 top-0 p-6">
       {username ? (
-        <span className="text-lg">Welcome {username}!</span>
+        <span className="text-lg">
+          Welcome <span className="capitalize">{username}</span>!
+        </span>
       ) : (
         <Button onClick={handleLogin}>Login</Button>
       )}
